@@ -2,6 +2,7 @@ package bankmachine
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -66,20 +67,25 @@ func (ds Digits) String() string {
 
 func (ds *Digits) Checksum() string {
 
-	number := ds.String()
+	numbers := ds.String()
 
-	if strings.Contains(number, "?") {
-		return fmt.Sprintf("%s ILL", number)
+	if strings.Contains(numbers, "?") {
+		return fmt.Sprintf("%s ILL", numbers)
 	}
 
 	var ch int
-	for i := len(number) - 1; i >= 0; i-- {
-		ch += (9 * (i + 1))
+	for i := len(numbers); i >= 1; i-- {
+		s := string(numbers[9-i])
+		num, err := strconv.Atoi(s)
+		if err != nil {
+			panic(err)
+		}
+		ch += (i * num)
 	}
 
 	if ch%11 != 0 {
-		return fmt.Sprintf("%s ERR", number)
+		return fmt.Sprintf("%s ERR", numbers)
 	}
 
-	return number
+	return numbers
 }
