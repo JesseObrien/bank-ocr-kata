@@ -6,12 +6,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type NumberTestCase struct {
+type DigitTestCase struct {
 	Input          string
 	ExpectedOutput string
 }
 
-var TestNumberCases = []NumberTestCase{
+var TestNumberCases = []DigitTestCase{
 	{`
  _  _  _  _  _  _  _  _  _ 
 | || || || || || || || || |
@@ -80,11 +80,47 @@ var TestNumberCases = []NumberTestCase{
 	},
 }
 
-func TestParseNumbers(t *testing.T) {
+func TestParseNumbersParsesAllDigits(t *testing.T) {
 	m := NewBankMachine()
 
 	for _, tc := range TestNumberCases {
-		assert.Equal(t, tc.ExpectedOutput, m.read(tc.Input))
+		ds := m.Parse(tc.Input)
+		assert.Equal(t, tc.ExpectedOutput, ds.String())
 	}
+}
 
+var ChecksumTestCases = []DigitTestCase{
+	{`
+ _  _     _  _        _  _ 
+|_ |_ |_| _|  |  ||_||_||_ 
+|_||_|  | _|  |  |  | _| _|`,
+		"664371495 ERR",
+	},
+	{`
+ _  _  _  _  _  _  _  _    
+| || || || || || || ||_   |
+|_||_||_||_||_||_||_| _|  |`,
+		"000000051",
+	},
+	{`
+    _  _  _  _  _  _     _ 
+|_||_|| || ||_   |  |  | _ 
+  | _||_||_||_|  |  |  | _|`,
+		"49006771? ILL",
+	},
+	{`
+    _  _     _  _  _  _  _ 
+  | _| _||_| _ |_   ||_||_|
+  ||_  _|  | _||_|  ||_| _ `,
+		"1234?678? ILL",
+	},
+}
+
+func TestNumbersChecksumPasses(t *testing.T) {
+	m := NewBankMachine()
+
+	for _, ctc := range ChecksumTestCases {
+		cs := m.Parse(ctc.Input)
+		assert.Equal(t, ctc.ExpectedOutput, cs.Checksum())
+	}
 }
