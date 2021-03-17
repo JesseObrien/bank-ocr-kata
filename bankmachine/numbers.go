@@ -1,49 +1,51 @@
 package bankmachine
 
-const zero = `
- _ 
-| |
-|_|`
+const Zero = `` +
+	` _ ` +
+	`| |` +
+	`|_|`
 
-const one = `
-  |
-  |`
+const One = `` +
+	`   ` +
+	`  |` +
+	`  |`
 
-const two = `
- _ 
- _|
-|_`
+const Two = `` +
+	` _ ` +
+	` _|` +
+	`|_ `
 
-const three = `
- _ 
- _|
- _|`
+const Three = `` +
+	` _ ` +
+	` _|` +
+	` _|`
 
-const four = `
-|_|
-  |`
+const Four = `` +
+	`   ` +
+	`|_|` +
+	`  |`
 
-const five = `
- _ 
-|_
- _|`
+const Five = `` +
+	` _ ` +
+	`|_ ` +
+	` _|`
 
-const six = `
- _ 
-|_
-|_|`
+const Six = `` +
+	` _ ` +
+	`|_ ` +
+	`|_|`
 
-const seven = `
- _ 
-  |
-  |`
+const Seven = `` +
+	` _ ` +
+	`  |` +
+	`  |`
 
-const eight = `
- _ 
-|_|
-|_|`
+const Eight = `` +
+	` _ ` +
+	`|_|` +
+	`|_|`
 
-const nine = `
- _ 
-|_|
- _|`
+const Nine = `` +
+	` _ ` +
+	`|_|` +
+	` _|`
